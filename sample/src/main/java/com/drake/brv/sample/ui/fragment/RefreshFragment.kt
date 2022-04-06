@@ -60,16 +60,22 @@ class RefreshFragment : EngineFragment<FragmentRefreshBinding>(R.layout.fragment
             toast("右上角菜单可以操作刷新结果, 默认2s结束")
         }.autoRefresh()
     }
-
+    private index = 0
     private fun getData(): List<Any> {
-        return mutableListOf<Any>().apply {
-            for (i in 0..9) {
-                when (i) {
-                    1, 2 -> add(TwoSpanModel())
-                    else -> add(Model())
+        return if(index==0){
+                index=1
+                mutableListOf<Any>().apply {
+                for (i in 0..9) {
+                    when (i) {
+                        1, 2 -> add(TwoSpanModel())
+                        else -> add(Model())
+                    }
                 }
             }
-        }
+        }else{
+			index=0
+			mutableListOf()
+		}
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
